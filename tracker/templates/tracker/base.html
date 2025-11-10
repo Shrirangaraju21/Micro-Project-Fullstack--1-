@@ -1,13 +1,40 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Expense Tracker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
-    <h1>Expense Tracker</h1>
-    <hr>
-    {% block content %}{% endblock %}
+    <div class="container">
+        <header>
+            <h1>Expense Tracker</h1>
+            {% if user.is_authenticated %}
+                <div style="text-align: right; margin-bottom: 10px;">
+                    <span>Welcome, {{ user.username }}</span>
+                    <form method="post" action="{% url 'logout' %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-link">Logout</button>
+                    </form>
+                </div>
+            {% else %}
+                <div style="text-align: right; margin-bottom: 10px;">
+                    <a href="{% url 'login' %}">Login</a>
+                    <a href="{% url 'register' %}">Register</a>
+                </div>
+            {% endif %}
+            <hr>
+        </header>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </div>
 </body>
 </html>

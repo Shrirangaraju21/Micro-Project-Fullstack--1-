@@ -1,23 +1,48 @@
 {% extends 'tracker/base.html' %}
 
 {% block content %}
-<a href="{% url 'add_expense' %}">Add Expense</a>
+<div class="dashboard-actions">
+  <a href="{% url 'add_expense' %}" class="btn">➕ Add Expense</a>
+  <a href="{% url 'category_chart' %}" class="btn">📊 View Category-Wise Chart</a>
+</div>
+
 <h2>Total: ₹{{ total }}</h2>
-<table>
+
+{% if expenses %}
+<table class="expense-table">
+  <thead>
     <tr>
-        <th>Title</th><th>Amount</th><th>Category</th><th>Date</th><th>Actions</th>
+      <th>Title</th>
+      <th>Amount</th>
+      <th>Category</th>
+      <th>Date</th>
+      <th>Group</th>
+      <th>Actions</th>
     </tr>
+  </thead>
+  <tbody>
     {% for expense in expenses %}
     <tr>
-        <td>{{ expense.title }}</td>
-        <td>₹{{ expense.amount }}</td>
-        <td>{{ expense.category }}</td>
-        <td>{{ expense.date }}</td>
-        <td>
-            <a href="{% url 'edit_expense' expense.pk %}">Edit</a>
-            <a href="{% url 'delete_expense' expense.pk %}">Delete</a>
-        </td>
+      <td>{{ expense.title }}</td>
+      <td>₹{{ expense.amount }}</td>
+      <td>{{ expense.category }}</td>
+      <td>{{ expense.date }}</td>
+      <td>
+        {% if expense.group %}
+          <span style="color:gray;">{{ expense.group.name }}</span>
+        {% else %}
+          —
+        {% endif %}
+      </td>
+      <td>
+        <a href="{% url 'edit_expense' expense.pk %}">Edit</a> |
+        <a href="{% url 'delete_expense' expense.pk %}">Delete</a>
+      </td>
     </tr>
     {% endfor %}
+  </tbody>
 </table>
+{% else %}
+  <p>No expenses recorded yet. Start by <a href="{% url 'add_expense' %}">adding one</a>.</p>
+{% endif %}
 {% endblock %}

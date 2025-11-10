@@ -1,0 +1,47 @@
+{% extends 'tracker/base.html' %}
+
+{% block content %}
+<h2>Category-Wise Expense Chart</h2>
+
+{% if categories %}
+  <canvas id="expenseChart" width="400" height="200"></canvas>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById('expenseChart').getContext('2d');
+    const expenseChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: {{ categories|safe }},
+        datasets: [{
+          label: 'Total Spent (₹)',
+          data: {{ totals|safe }},
+          backgroundColor: {{ colors|safe }},
+          borderColor: {{ colors|safe }},
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: { enabled: true }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: { display: true, text: 'Amount (₹)' }
+          },
+          x: {
+            title: { display: true, text: 'Category' }
+          }
+        }
+      }
+    });
+  </script>
+{% else %}
+  <p>No expenses found to generate chart. <a href="{% url 'add_expense' %}">Add some expenses</a> to see analytics.</p>
+{% endif %}
+
+<a href="{% url 'index' %}" class="back-link">← Back to Dashboard</a>
+{% endblock %}
