@@ -101,7 +101,8 @@ There are no automated tests included yet. Recommended minimal tests to add:
 ## Teame Members 
 Team Number 1
 - Shriranagaraju D    4MC23IS103
-- Purushotham T P     4MC23IS091
+- Purushotham T P     4MC23IS083
 - Prasanna Kumar K S  4MC23IS075
-- Saketh Devang H R   4MC23IS083
+- Saketh Devang H R   4MC23IS091
 - Harish J Doddamani  4MC22IS039
+
