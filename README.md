@@ -97,3 +97,11 @@ There are no automated tests included yet. Recommended minimal tests to add:
 ## Security & privacy notes
 
 - This project is for learning/demo purposes. If deploying to production, switch from SQLite to PostgreSQL, add proper `ALLOWED_HOSTS`, configure secret management (don't keep `SECRET_KEY` in source control), enable HTTPS, and review user data policies.
+
+## Teame Members 
+Team Number 1
+- Shriranagaraju D    4MC23IS103
+- Purushotham T P     4MC23IS091
+- Prasanna Kumar K S  4MC23IS075
+- Saketh Devang H R   4MC23IS083
+- Harish J Doddamani  4MC22IS039
